@@ -2,9 +2,9 @@ transrt
 =======
 
 **transrt** meaning **Translator of SubRip File**, a tool used to
-productively translate the subtile files from Google Developer Group
-Youtube video channel, as my contributing to GDG Zhuhai Subtitle Fan
-Club.
+productively translate (manually) the subtile files from Google
+Developer Group Youtube video channel, as my contributing to GDG
+Zhuhai Subtitle Fanclub.
 
 Installation
 ------------
