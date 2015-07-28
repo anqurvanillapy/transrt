@@ -15,7 +15,7 @@ Commmands     Functions
 def parse_argument():
 
     parser = argparse.ArgumentParser(
-        description='Translator of SubRip file'
+        description='A very simple translator of SubRip file'
         )
 
     parser.add_argument(
@@ -70,7 +70,7 @@ class Transrt(object):
             self.srt = open(filename, 'r')
             self.pack(self.srt)
         except IOError:
-            raise "Unable to open file '%s'" % filename
+            print "Unable to open file '%s'" % filename
 
     def pack(self, srt):
 
@@ -214,7 +214,11 @@ class Transrt(object):
         if self.not_found:
             print "Keynumber '%s' Not Found" % kwd
 
-if __name__ == '__main__':
+def main():
 
     args = parse_argument()
     transrt = Transrt(args)
+
+
+if __name__ == '__main__':
+    main()
