@@ -3,6 +3,15 @@
 
 import argparse
 
+TRANSLATE_HELP = '''
+Commmands     Functions
+---------     -----------------
+    'f'       Forwarding
+    'b'       Backwarding
+    's'       Shutting Down
+---------     -----------------
+'''
+
 def parse_argument():
 
     parser = argparse.ArgumentParser(
@@ -11,26 +20,32 @@ def parse_argument():
 
     parser.add_argument(
         'filename',
-        metavar='filename',
+        metavar='Filename',
         action='store'
         )
 
     parser.add_argument(
         '-o', '--output',
         dest='ofile',
+        metavar='Filename',
         action='store',
         default='a.srt'
         )
 
-    parser.add_argument(
-        '-n', '--search-number',
+    search_parser = parser.add_mutually_exclusive_group()
+
+    search_parser.add_argument(
+        '-kn', '--keynumber',
         dest='kn',
+        metavar='Keynumber',
+        type=int,
         action='store'
         )
 
-    parser.add_argument(
-        '-wd', '--search-word',
+    search_parser.add_argument(
+        '-kwd', '--keyword',
         dest='kwd',
+        metavar='Keyword',
         action='store'
         )
 
@@ -45,13 +60,9 @@ class Transrt(object):
         self.kn = args.kn
         self.kwd = args.kwd
 
+        self.not_found = False
+
         self.initFile(self.filename)
-
-        if self.kn:
-            self.searchKeynum(self.kn)
-
-        if self.kwd:
-            self.searchKeywd(self.kwd)
 
     def initFile(self, filename):
 
@@ -66,7 +77,7 @@ class Transrt(object):
         print 'Packing file...'
 
         srt = filter(None, srt.read().split('\n'))
-        packed = []
+        self.packed = []
         index = 0
         num = 1
 
@@ -91,26 +102,45 @@ class Transrt(object):
                 except:
                     pass
 
-                packed.append(srt_dict)
+                self.packed.append(srt_dict)
                 num += 1
             else:
                 index += 1
 
-        # print packed
-        if packed:
+        # print self.packed
+        if self.packed:
             print 'Success'
-            self.translate(packed)
+            print TRANSLATE_HELP
+
+            if self.kn:
+                self.searchKeynum(self.kn)
+            elif self.kwd:
+                self.searchKeywd(self.kwd)
+            else:
+                self.translate()
         else:
             print 'Unable to pack the file'
 
-    def translate(self, srt):
+    def translate(self, count=0, skip=False):
 
+        srt = self.packed
         ofile = open(self.ofile, 'w')
-        count = 0
         stdio = []
         ioitem = None
         self.shut = False
         self.back = False
+
+        if skip:
+            temp = 0
+            while temp < count:
+                ioitem = str(srt[temp]['num']) + '\n' + srt[temp]['dura'] + '\n'
+                for item in srt[temp]['script']:
+                    ioitem += item + '\n'
+                for item in srt[temp]['cont']:
+                    ioitem += item + '\n'
+                ioitem += '\n'
+                stdio.append(ioitem)
+                temp += 1
 
         while count < len(srt):
             print srt[count]['num']
@@ -158,11 +188,31 @@ class Transrt(object):
 
     def searchKeynum(self, kn):
 
-        print kn
+        for item in self.packed:
+            if kn == item['num']:
+                print "\nKeynumber '%d' Found" % kn
+                self.not_found = False
+                self.translate(kn-1, True)
+                break
+            else:
+                self.not_found = True
+
+        if self.not_found:
+            print "Keynumber '%d' Not Found" % kn
 
     def searchKeywd(self, kwd):
 
-        print kwd
+        for pack in self.packed:
+            for item in pack['cont']:
+                if kwd in item:
+                    print "\nKeynumber '%s' Found in '%d'" % (kwd, pack['num'])
+                    self.not_found = False
+                    self.translate(pack['num']-1, True)
+                else:
+                    self.not_found = True
+
+        if self.not_found:
+            print "Keynumber '%s' Not Found" % kwd
 
 if __name__ == '__main__':
 
