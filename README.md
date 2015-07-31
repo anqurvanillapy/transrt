@@ -49,7 +49,7 @@ optional arguments:
 
 ### Normal Usage ###
 
-Type the command below and specify your file names
+Type the command below and specify your file name
 
 ```
 transrt <filename>
@@ -73,7 +73,7 @@ After translating, the default output file `a.srt` will be generated
 ### Search ###
 
 - `-kn`, `--keynumber`
-    + The SRT file will be seperated into several dicts, and every
+    + The SRT file will be seperated into different dicts, and every
     dict is numbered by its top figure of a certain block, as you can
     open a SRT file to see its file content structure
     + Give `int`-typed arguments to `-kn` or `--keynumber` option, to

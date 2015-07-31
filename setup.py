@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
-short_description = "A very simple translator of SubRip file"
+short_description = "A simple manual translator of SubRip file"
 
 try:
     long_description = open("README.md").read()
