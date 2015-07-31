@@ -52,7 +52,7 @@ optional arguments:
 Type the command below and specify your file name
 
 ```
-transrt <filename>
+$ transrt <filename>
 ```
 
 And the manual translating will be in process,
@@ -69,6 +69,74 @@ Commmands     Functions
 ```
 
 After translating, the default output file `a.srt` will be generated
+
+### Example ###
+
+Choose a SRT file to translate and type
+
+```
+$ transrt example.srt -o translated.srt
+```
+
+And `example.srt` will be initialized, on terminal displaying
+
+```
+$ transrt example.srt -o translated.srt
+Packing file...
+Success
+
+Commmands     Functions
+---------     --------------------------
+    'f'       Forwarding
+    'b'       Backwarding
+    's'       Shutting Down,
+              or Skipping Search Results
+---------     --------------------------
+
+1
+00:00:00,000 --> 00:00:01,00
+Hello, world!
+>>> 
+```
+Now you can manually translate the script, press `Enter` to add a
+newline, type `f` to go forwards, skipping to the second line
+
+```
+$ transrt example.srt -o translated.srt
+Packing file...
+Success
+
+Commmands     Functions
+---------     --------------------------
+    'f'       Forwarding
+    'b'       Backwarding
+    's'       Shutting Down,
+              or Skipping Search Results
+---------     --------------------------
+
+1
+00:00:00,000 --> 00:00:01,000
+Hello, world!
+>>> 你好, 世界!
+>>> f
+2
+00:00:01,000 --> 00:00:02,000
+Aloha, jerk!
+>>> s
+```
+
+As above, if now type `s` to shut down translating, the output file
+`translated.srt` will be like
+
+```
+1
+00:00:00,000 --> 00:00:01,000
+你好, 世界!
+Hello, world!
+```
+
+The second line will not be written in the output file
+Well, enjoy your translating!
 
 ### Search ###
 
