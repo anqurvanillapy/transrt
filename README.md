@@ -55,7 +55,7 @@ Type the command below and specify your file name
 $ transrt <filename>
 ```
 
-And the manual translating will be in process,
+And the manual translating will be in process,  
 The built-in commands are shown below
 
 ```

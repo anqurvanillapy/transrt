@@ -191,6 +191,8 @@ class Transrt(object):
         for item in stdio:
             ofile.write(item)
 
+        ofile.close()
+
     def searchKeynum(self, kn):
 
         for item in self.packed:
