@@ -5,31 +5,34 @@ import argparse
 
 TRANSLATE_HELP = '''
 Commmands     Functions
----------     -----------------
+---------     --------------------------
     'f'       Forwarding
     'b'       Backwarding
-    's'       Shutting Down
----------     -----------------
+    's'       Shutting Down,
+              or Skipping Search Results
+---------     --------------------------
 '''
 
 def parse_argument():
 
     parser = argparse.ArgumentParser(
-        description='A very simple translator of SubRip file'
+        description='A simple manual translator of SubRip file'
         )
 
     parser.add_argument(
         'filename',
-        metavar='Filename',
-        action='store'
+        metavar='filename',
+        action='store',
+        help='input file name'
         )
 
     parser.add_argument(
         '-o', '--output',
         dest='ofile',
-        metavar='Filename',
+        metavar='filename',
         action='store',
-        default='a.srt'
+        default='a.srt',
+        help='output file name'
         )
 
     search_parser = parser.add_mutually_exclusive_group()
@@ -37,16 +40,18 @@ def parse_argument():
     search_parser.add_argument(
         '-kn', '--keynumber',
         dest='kn',
-        metavar='Keynumber',
+        metavar='keynumber',
         type=int,
-        action='store'
+        action='store',
+        help='the key number to search for'
         )
 
     search_parser.add_argument(
         '-kwd', '--keyword',
         dest='kwd',
-        metavar='Keyword',
-        action='store'
+        metavar='keyword',
+        action='store',
+        help='the keyword to search for'
         )
 
     return parser.parse_args()
@@ -149,7 +154,7 @@ class Transrt(object):
                 print item
 
             while True:
-                item = raw_input('>> ')
+                item = raw_input('>>> ')
                 # 'f' for Forwarding
                 if item == 'f':
                     break
@@ -190,7 +195,7 @@ class Transrt(object):
 
         for item in self.packed:
             if kn == item['num']:
-                print "\nKeynumber '%d' Found" % kn
+                print "\nKey number '%d' Found" % kn
                 self.not_found = False
                 self.translate(kn-1, True)
                 break
@@ -198,21 +203,34 @@ class Transrt(object):
                 self.not_found = True
 
         if self.not_found:
-            print "Keynumber '%d' Not Found" % kn
+            print "Key number '%d' Not Found" % kn
 
     def searchKeywd(self, kwd):
+
+        count = 0
+        temp = 1
 
         for pack in self.packed:
             for item in pack['cont']:
                 if kwd in item:
-                    print "\nKeynumber '%s' Found in '%d'" % (kwd, pack['num'])
+                    count += 1
+
+        if count:
+            print "Got %d Results" % count
+
+        for pack in self.packed:
+            for item in pack['cont']:
+                if kwd in item:
+                    print "\nKeyword '%s' Found in '%d'" % (kwd, pack['num'])
+                    print "Now on %d / %d, %d Left" % (temp, count, count - temp)
                     self.not_found = False
+                    temp += 1
                     self.translate(pack['num']-1, True)
                 else:
                     self.not_found = True
 
         if self.not_found:
-            print "Keynumber '%s' Not Found" % kwd
+            print "Keyword '%s' Not Found" % kwd
 
 def main():
 

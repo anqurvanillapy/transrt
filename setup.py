@@ -12,7 +12,6 @@ setup(
     name="transrt",
     version="0.1.0",
     description=short_description,
-    license="MIT",
     author="AnqurVanillapy",
     author_email="anqurvanillapy@gmail.com",
     url="https://github.com/anqurvanillapy/transrt",
