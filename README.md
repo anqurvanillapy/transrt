@@ -135,8 +135,8 @@ As above, if now type `s` to shut down translating, the output file
 Hello, world!
 ```
 
-The second line will not be written in the output file
-Well, enjoy your translating!
+The second line will not be written in the output file,  
+And now, enjoy your translating!
 
 ### Search ###
 
