@@ -147,7 +147,7 @@ class Transrt(object):
                 temp += 1
 
         while count < len(srt):
-            print '\n' + srt[count]['num']
+            print '\n' + str(srt[count]['num'])
             print srt[count]['dura']
             for item in srt[count]['cont']:
                 print item
