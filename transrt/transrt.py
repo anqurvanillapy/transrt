@@ -10,8 +10,7 @@ Commmands     Functions
     'b'       Backwarding
     's'       Shutting Down,
               or Skipping Search Results
----------     --------------------------
-'''
+---------     --------------------------'''
 
 def parse_argument():
 
@@ -148,7 +147,7 @@ class Transrt(object):
                 temp += 1
 
         while count < len(srt):
-            print srt[count]['num']
+            print '\n' + srt[count]['num']
             print srt[count]['dura']
             for item in srt[count]['cont']:
                 print item

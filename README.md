@@ -165,6 +165,14 @@ Known Issues
 **fullwidth** ones will not be deleted completely on the terminal, but
 actually deleted if I print them
 
+TODO
+----
+
+* [ ] Add a feature of restarting the translation of a certain line by
+typing command `r`
+* [ ] Make it availalbe to preview the next line to better work in
+context
+
 Support
 -------
 
