@@ -63,8 +63,9 @@ Commmands     Functions
 ---------     --------------------------
     'f'       Forwarding
     'b'       Backwarding
+    'r'       Restarting one line
     's'       Shutting Down,
-              or Skipping Search Results
+              or Skipping to Next Result
 ---------     --------------------------
 ```
 
@@ -89,13 +90,18 @@ Commmands     Functions
 ---------     --------------------------
     'f'       Forwarding
     'b'       Backwarding
+    'r'       Restarting one line
     's'       Shutting Down,
-              or Skipping Search Results
+              or Skipping to Next Result
 ---------     --------------------------
 
 1
 00:00:00,000 --> 00:00:01,00
 Hello, world!
+
+(Next line is
+        Aloha, jerk!
+)
 >>> 
 ```
 Now you can manually translate the script, press `Enter` to add a
@@ -110,18 +116,26 @@ Commmands     Functions
 ---------     --------------------------
     'f'       Forwarding
     'b'       Backwarding
+    'r'       Restarting one line
     's'       Shutting Down,
-              or Skipping Search Results
+              or Skipping to Next Result
 ---------     --------------------------
 
 1
-00:00:00,000 --> 00:00:01,000
+00:00:00,000 --> 00:00:01,00
 Hello, world!
+
+(Next line is
+        Aloha, jerk!
+)
 >>> 你好, 世界!
 >>> f
+
 2
 00:00:01,000 --> 00:00:02,000
 Aloha, jerk!
+
+(This is the last line.)
 >>> s
 ```
 

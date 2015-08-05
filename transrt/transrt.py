@@ -8,8 +8,9 @@ Commmands     Functions
 ---------     --------------------------
     'f'       Forwarding
     'b'       Backwarding
+    'r'       Restarting one line
     's'       Shutting Down,
-              or Skipping Search Results
+              or Skipping to Next Result
 ---------     --------------------------'''
 
 def parse_argument():
@@ -151,7 +152,7 @@ class Transrt(object):
             for item in srt[count]['cont']:
                 print item
             if count == len(srt) - 1:
-                print '(This is the last line.)'
+                print '\n(This is the last line.)'
             else:
                 preview = count + 1
                 print '\n(Next line is'
@@ -222,7 +223,7 @@ class Transrt(object):
                 self.not_found = True
 
         if self.not_found:
-            print "Key number '%d' Not Found" % kn
+            print "\nKey number '%d' Not Found" % kn
 
     def searchKeywd(self, kwd):
 
@@ -249,7 +250,7 @@ class Transrt(object):
                     self.not_found = True
 
         if self.not_found:
-            print "Keyword '%s' Not Found" % kwd
+            print "\nKeyword '%s' Not Found" % kwd
 
 def main():
 
