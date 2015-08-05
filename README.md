@@ -168,9 +168,9 @@ actually deleted if I print them
 TODO
 ----
 
-* [ ] Add a feature of restarting the translation of a certain line by
+* [x] Add a feature of restarting the translation of a certain line by
 typing command `r`
-* [ ] Make it available to preview the next line to better work in
+* [x] Make it available to preview the next line to better work in
 context
 
 Support

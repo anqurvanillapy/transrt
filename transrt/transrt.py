@@ -131,8 +131,7 @@ class Transrt(object):
         ofile = open(self.ofile, 'w')
         stdio = []
         ioitem = None
-        self.shut = False
-        self.back = False
+        self.shut = self.back = self.restart = False
 
         if skip:
             temp = 0
@@ -151,6 +150,14 @@ class Transrt(object):
             print srt[count]['dura']
             for item in srt[count]['cont']:
                 print item
+            if count == len(srt) - 1:
+                print '(This is the last line.)'
+            else:
+                preview = count + 1
+                print '\n(Next line is'
+                for item in srt[preview]['cont']:
+                    print '\t' + item
+                print ')'
 
             while True:
                 item = raw_input('>>> ')
@@ -162,17 +169,28 @@ class Transrt(object):
                     self.shut = True
                     break
                 # 'b' for Backwarding
-                elif item == 'b' and len(stdio) != 0:
+                elif item == 'b':
                     self.back = True
+                    break
+                # 'r' for Restarting
+                elif item == 'r':
+                    self.restart = True
                     break
                 srt[count]['script'].append(item)
                 srt[count]['script'] = filter(None, srt[count]['script'])
 
             if self.back:
-                del stdio[len(stdio)-1]
-                count -= 1
+                if len(stdio):
+                    to_del = len(stdio) - 1
+                    del stdio[to_del]
+                    count -= 1
                 srt[count]['script'] = []
                 self.back = False
+                continue
+
+            if self.restart:
+                srt[count]['script'] = []
+                self.restart = False
                 continue
 
             ioitem = str(srt[count]['num']) + '\n' + srt[count]['dura'] + '\n'
