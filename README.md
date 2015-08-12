@@ -186,6 +186,8 @@ TODO
 typing command `r`
 * [x] Make it available to preview the next line to better work in
 context
+* [ ] Add a new argument with which the script can cover the original
+contents from the subtitles, leaving the translated texts alone
 
 Support
 -------
